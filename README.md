@@ -8,7 +8,7 @@
 - Bootstrap CSS
 
 ### Usage
-- Option 1: Open gitio page here: 
+- Option 1: Open gitio page here: https://niketarachhadia.github.io/uniregistry/ 
 - Option 2: 
 	- Clone Repo
 	- npm install
