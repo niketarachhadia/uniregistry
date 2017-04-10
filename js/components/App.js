@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const App = React.createClass({
-  render: function () {
+class App extends Component{
+  render() {
     return (
 	  <div className="row">
 		<div className="panel panel-default col-xs-12 col-md-8 col-md-offset-2">
@@ -12,7 +12,7 @@ const App = React.createClass({
 		</div>
 	  </div>
     );
-  },
-});
+  }
+}
 
 export default App;

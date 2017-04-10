@@ -10,6 +10,20 @@ import { syncHistoryWithStore} from 'react-router-redux';
 import { Router, Route, hashHistory,Redirect,IndexRedirect  } from 'react-router';
 
 const history = syncHistoryWithStore(hashHistory, store)
+
+//Adding endsWith Polyfill
+if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.lastIndexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+
 var routes = (
 	<Provider store={store}>
 		<Router history={history}>

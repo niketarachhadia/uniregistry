@@ -14603,36 +14603,55 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var App = _react2.default.createClass({
-	displayName: "App",
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	render: function render() {
-		return _react2.default.createElement(
-			"div",
-			{ className: "row" },
-			_react2.default.createElement(
-				"div",
-				{ className: "panel panel-default col-xs-12 col-md-8 col-md-offset-2" },
-				_react2.default.createElement(
-					"div",
-					{ className: "panel-heading" },
-					"Uniregistry"
-				),
-				_react2.default.createElement(
-					"div",
-					{ className: "panel-body" },
-					this.props.children
-				)
-			)
-		);
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var App = function (_Component) {
+	_inherits(App, _Component);
+
+	function App() {
+		_classCallCheck(this, App);
+
+		return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
 	}
-});
+
+	_createClass(App, [{
+		key: "render",
+		value: function render() {
+			return _react2.default.createElement(
+				"div",
+				{ className: "row" },
+				_react2.default.createElement(
+					"div",
+					{ className: "panel panel-default col-xs-12 col-md-8 col-md-offset-2" },
+					_react2.default.createElement(
+						"div",
+						{ className: "panel-heading" },
+						"Uniregistry"
+					),
+					_react2.default.createElement(
+						"div",
+						{ className: "panel-body" },
+						this.props.children
+					)
+				)
+			);
+		}
+	}]);
+
+	return App;
+}(_react.Component);
 
 exports.default = App;
 
@@ -14675,20 +14694,21 @@ var Details = function (_Component) {
 
 		var _this = _possibleConstructorReturn(this, (Details.__proto__ || Object.getPrototypeOf(Details)).call(this, props));
 
-		var id = _this.props.params.domainid;
+		var id = props.params.domainid;
 		var response = _this.props.dispatch((0, _actions.openDetails)(id));
 		if (response.type === "INIT_DETAILS") {
 			_this.state = { details: response.details };
 		}
+		_this.handleChange = _this.handleChange.bind(_this);
+		_this.handleSave = _this.handleSave.bind(_this);
 		return _this;
 	}
 
 	_createClass(Details, [{
 		key: 'handleChange',
 		value: function handleChange(event) {
-
 			var updatedDetails = this.state.details;
-			updatedDetails[event.target.id] = event.target.value;
+			updatedDetails[event.target.name] = event.target.value;
 			this.setState({ details: updatedDetails });
 		}
 	}, {
@@ -14726,8 +14746,8 @@ var Details = function (_Component) {
 						_react2.default.createElement(
 							'div',
 							{ className: 'col-10' },
-							_react2.default.createElement('input', { className: 'form-control', type: 'text', value: this.state.details.domain, id: 'domain',
-								onChange: this.handleChange.bind(this) })
+							_react2.default.createElement('input', { className: 'form-control', type: 'text', value: this.state.details.domain, name: 'domain',
+								onChange: this.handleChange })
 						)
 					),
 					_react2.default.createElement(
@@ -14741,8 +14761,8 @@ var Details = function (_Component) {
 						_react2.default.createElement(
 							'div',
 							{ className: 'col-10' },
-							_react2.default.createElement('input', { className: 'form-control', type: 'email', value: this.state.details.registrant_email, id: 'registrant_email',
-								onChange: this.handleChange.bind(this) })
+							_react2.default.createElement('input', { className: 'form-control', type: 'email', value: this.state.details.registrant_email, name: 'registrant_email',
+								onChange: this.handleChange })
 						)
 					),
 					_react2.default.createElement(
@@ -14756,14 +14776,14 @@ var Details = function (_Component) {
 						_react2.default.createElement(
 							'div',
 							{ className: 'col-10' },
-							_react2.default.createElement('input', { className: 'form-control', type: 'number', value: this.state.details.price, id: 'price',
-								onChange: this.handleChange.bind(this) })
+							_react2.default.createElement('input', { className: 'form-control', type: 'number', value: this.state.details.price, name: 'price',
+								onChange: this.handleChange })
 						)
 					)
 				),
 				_react2.default.createElement(
 					'button',
-					{ type: 'button', className: 'btn btn-success', onClick: this.handleSave.bind(this) },
+					{ type: 'button', className: 'btn btn-success', onClick: this.handleSave },
 					'Save Changes'
 				)
 			);
@@ -15018,20 +15038,34 @@ var _reactRouter = __webpack_require__(79);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var history = (0, _reactRouterRedux.syncHistoryWithStore)(_reactRouter.hashHistory, _store2.default);
+
+//Adding endsWith Polyfill
+if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function (searchString, position) {
+    var subjectString = this.toString();
+    if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+      position = subjectString.length;
+    }
+    position -= searchString.length;
+    var lastIndex = subjectString.lastIndexOf(searchString, position);
+    return lastIndex !== -1 && lastIndex === position;
+  };
+}
+
 var routes = _react2.default.createElement(
-	_reactRedux.Provider,
-	{ store: _store2.default },
-	_react2.default.createElement(
-		_reactRouter.Router,
-		{ history: history },
-		_react2.default.createElement(
-			_reactRouter.Route,
-			{ path: '/', component: _App2.default },
-			_react2.default.createElement(_reactRouter.Route, { path: 'intro', component: _intro2.default }),
-			_react2.default.createElement(_reactRouter.Route, { path: 'details/:domainid', component: _details2.default }),
-			_react2.default.createElement(_reactRouter.IndexRedirect, { to: 'intro' })
-		)
-	)
+  _reactRedux.Provider,
+  { store: _store2.default },
+  _react2.default.createElement(
+    _reactRouter.Router,
+    { history: history },
+    _react2.default.createElement(
+      _reactRouter.Route,
+      { path: '/', component: _App2.default },
+      _react2.default.createElement(_reactRouter.Route, { path: 'intro', component: _intro2.default }),
+      _react2.default.createElement(_reactRouter.Route, { path: 'details/:domainid', component: _details2.default }),
+      _react2.default.createElement(_reactRouter.IndexRedirect, { to: 'intro' })
+    )
+  )
 );
 
 _reactDom2.default.render(routes, document.getElementById('root'));
