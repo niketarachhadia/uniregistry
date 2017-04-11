@@ -11,7 +11,8 @@ class Intro extends Component {
 				initDomainList()
 			);
 	  }
-	} 
+	}
+	
   showCheckMark(domainName){
 	  if(domainName.endsWith(".cars") || domainName.endsWith(".lol")){
 		  return <span className="fa fa-check"></span>
@@ -19,6 +20,7 @@ class Intro extends Component {
 		  return <span></span>
 	  }
   }
+  
   openDetails(id,dispatch,event){
 	  event.preventDefault();
 	  
@@ -57,6 +59,12 @@ class Intro extends Component {
     );
   }
 }
+
+Intro.propTypes= {
+    domainList: React.PropTypes.array.isRequired,
+	dispatch :React.PropTypes.func
+  }	
+
 const mapStateToProps = (state, ownProps) => {
   return {
 		domainList:state.introReducer

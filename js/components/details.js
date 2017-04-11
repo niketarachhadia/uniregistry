@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {openDetails,saveDetails} from '../redux/actions'
 import {push} from 'react-router-redux';
+import {Domain} from '../redux/data'
 
 class Details extends Component {  
   constructor(props) {
     super(props);
-	const id=props.params.domainid
+	const id=props.domainid
 	const response=this.props.dispatch(
 				openDetails(id)
 			)
@@ -68,10 +69,17 @@ class Details extends Component {
   }
 }
 
+Details.propTypes={
+	domainid : React.PropTypes.string.isRequired,
+	details : React.PropTypes.object,
+    dispatch :React.PropTypes.func
+  }	
+
 const mapStateToProps = (state, ownProps) => {
   return {
 		details:state.detailsReducer,
-		domainList:state.introReducer
+		domainList:state.introReducer,
+		domainid: ownProps.params.domainid,
   }
 }
 
